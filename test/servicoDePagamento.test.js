@@ -57,4 +57,57 @@ describe('Classe de Servico de Pagamento', () => {
         assert.equal(ultimoPagamento.valor, 99.99);
         assert.equal(ultimoPagamento.categoria, 'padrão');
     });
+
+    it('Teste 4: Validar o retorno do último registro lista de pagamentos a qual contém mais de um registro', () => {
+
+        //Arrange
+        const servicoDePagamento = new ServicoDePagamento();
+
+        // Act
+        const pagamentoUm = servicoDePagamento.realizarPagamento(
+            '1111-2222-3333',
+            'TesteEmpresa1',
+            99.99
+        );
+        const pagamentoDois = servicoDePagamento.realizarPagamento(
+            '4444-5555-6666',
+            'TesteEmpresa2',
+            50.50
+        );
+        const ultimoPagamento = servicoDePagamento.consultarUltimoPagamento();
+
+        //Assert            
+        assert.equal(ultimoPagamento.codigoDeBarras, '4444-5555-6666');
+        assert.equal(ultimoPagamento.empresa, 'TesteEmpresa2');
+        assert.equal(ultimoPagamento.valor, 50.50);
+        assert.equal(ultimoPagamento.categoria, 'padrão');
+    });
+
+    it('Teste 5: Validar que a lista de pagamentos permite salvar mais de um único registro', () => {
+
+        //Arrange
+        const servicoDePagamento = new ServicoDePagamento();
+
+        // Act
+        const pagamentoUm = servicoDePagamento.realizarPagamento(
+            '1111-2222-3333',
+            'TesteEmpresa1',
+            99.99
+        );
+        const pagamentoDois = servicoDePagamento.realizarPagamento(
+            '4444-5555-6666',
+            'TesteEmpresa2',
+            50.50
+        );
+        const pagamentoTres = servicoDePagamento.realizarPagamento(
+            '7777-8888-9999',
+            'TesteEmpresa3',
+            66.66
+        );
+
+        const qtdRegistrosDaLista = servicoDePagamento.listaDePagamentos.length;
+
+        //Assert       
+        assert.equal(qtdRegistrosDaLista, 3);
+    });
 });
