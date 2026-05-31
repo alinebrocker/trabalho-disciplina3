@@ -1,0 +1,24 @@
+{
+  "name": "trabalho-disciplina3",
+  "version": "1.0.0",
+  "description": "Trabalho de Conclusão da Disciplina 3",
+  "main": "index.js",
+  "scripts": {
+    "test": "echo \"Error: no test specified\" && exit 1"
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/alinebrocker/trabalho-disciplina3.git"
+  },
+  "keywords": [],
+  "author": "",
+  "license": "ISC",
+  "type": "module",
+  "bugs": {
+    "url": "https://github.com/alinebrocker/trabalho-disciplina3/issues"
+  },
+  "homepage": "https://github.com/alinebrocker/trabalho-disciplina3#readme",
+  "dependencies": {
+    "mocha": "^11.3.0"
+  }
+}
