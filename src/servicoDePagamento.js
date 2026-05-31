@@ -25,7 +25,7 @@ export default class servicoDePagamento {
     // Método 2: consultar o último pagamento
     consultarUltimoPagamento() {
         if (this.listaDePagamentos.length === 0) {
-            throw new Error('Nenhum pagamento realizado');
+            throw new Error('Nenhum pagamento realizado!');
         }
 
         return this.listaDePagamentos[this.listaDePagamentos.length - 1];

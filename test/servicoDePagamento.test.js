@@ -109,4 +109,44 @@ describe('Classe de Servico de Pagamento', () => {
         assert.equal(ultimoPagamento.valor, 50.50);
         assert.equal(ultimoPagamento.categoria, 'padrão');
     });
+
+    it('Teste 6: Validar msg de erro ao consultar lista de pagamentos que não possui registros', () => {
+
+        //Arrange
+        const servicoDePagamento = new ServicoDePagamento();
+
+        // Act        
+        const ultimoPagamento = () => {
+            servicoDePagamento.consultarUltimoPagamento();
+        };
+
+        //Assert            
+        assert.throws(ultimoPagamento,
+            {
+                message: 'Nenhum pagamento realizado!'
+            }
+        );
+    });
+
+    it('Teste 7: Validar msg de erro ao realizar pagamento inválido (valor igual a zero)', () => {
+
+        //Arrange
+        const servicoDePagamento = new ServicoDePagamento();
+
+        // Act        
+        const pagamentoComValorZero = () => {
+            servicoDePagamento.realizarPagamento(
+                '1111-2222-3333',
+                'TesteEmpresa1',
+                0.0
+            );
+        };
+
+        //Assert            
+        assert.throws(pagamentoComValorZero,
+            {
+                message: 'Valor inválido'
+            }
+        );
+    });
 });
