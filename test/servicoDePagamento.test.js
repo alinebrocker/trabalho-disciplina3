@@ -1,11 +1,9 @@
-//import servicoDePagamento from '../src/servicoDePagamento.js';
 import ServicoDePagamento from '../src/servicoDePagamento.js';
 import assert from 'node:assert';
 
 describe('Classe de Servico de Pagamento', () => {
-    it('Teste 1 - Validar que o pagamento é registrado na lista de pagamentos', function () {
+    it('Teste 1: Validar que o pagamento é registrado na lista de pagamentos', function () {
         //Arrange
-        //const servicoDePagamento = new servicoDePagamento();
         const servicoDePagamento = new ServicoDePagamento();
         const registro = ['0987-7656-3475', 'Samar', 156.87, 'cara'];
 
@@ -19,34 +17,44 @@ describe('Classe de Servico de Pagamento', () => {
         //Assert            
         assert.equal(resultado, 'Pagamento realizado!');
     })
-});
 
-/*it('Validar que o pagamento é registrado e consultar esse unico/ultimo pagamento', () => {
+    it('Teste 2: Validar consulta do último pagamento registrado com categoria /cara/', () => {
 
-    //Arrange
-    const servicoDePagamento = new ServicoDePagamento();
-    servicoDePagamento.pagar('0987-7656-3475', 'Samar', 156.87);
+        //Arrange
+        const servicoDePagamento = new ServicoDePagamento();
 
-    //Act
-    console.log(ultimoPagamento);
+        // Act
+        const resultado = servicoDePagamento.realizarPagamento(
+            '0987-7656-3475',
+            'Samar',
+            156.87
+        );
+        const ultimoPagamento = servicoDePagamento.consultarUltimoPagamento();
 
-    const ultimoPagamento = servicoDePagamento.consultarUltimoPagamento();
-
-    console.log(ultimoPagamento);
-
-    assert.deepStrictEqual(ultimoPagamento, {
-        codigoBarras: '0987-7656-3475',
-        empresa: 'Samar',
-        valor: 56.87,
-        categoria: 'cara'
+        //Assert            
+        assert.equal(ultimoPagamento.codigoDeBarras, '0987-7656-3475');
+        assert.equal(ultimoPagamento.empresa, 'Samar');
+        assert.equal(ultimoPagamento.valor, 156.87);
+        assert.equal(ultimoPagamento.categoria, 'cara');
     });
-    
-const ultimoPagamento = servicoDePagamento.consultarUltimoPagamento();
 
-assert.equal(ultimoPagamento.codigoDeBarras, '0987-7656-3475');
-assert.equal(ultimoPagamento.empresa, 'Samar');
-assert.equal(ultimoPagamento.valor, 156.87);
-assert.equal(ultimoPagamento.categoria, 'cara');
+    it('Teste 3: Validar consulta do último pagamento registrado com categoria /padrão/', () => {
 
+        //Arrange
+        const servicoDePagamento = new ServicoDePagamento();
 
-});*/
+        // Act
+        const resultado = servicoDePagamento.realizarPagamento(
+            '1234-5678-9000',
+            'Samar',
+            99.99
+        );
+        const ultimoPagamento = servicoDePagamento.consultarUltimoPagamento();
+
+        //Assert            
+        assert.equal(ultimoPagamento.codigoDeBarras, '1234-5678-9000');
+        assert.equal(ultimoPagamento.empresa, 'Samar');
+        assert.equal(ultimoPagamento.valor, 99.99);
+        assert.equal(ultimoPagamento.categoria, 'padrão');
+    });
+});
