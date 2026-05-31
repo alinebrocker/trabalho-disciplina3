@@ -58,32 +58,7 @@ describe('Classe de Servico de Pagamento', () => {
         assert.equal(ultimoPagamento.categoria, 'padrão');
     });
 
-    it('Teste 4: Validar o retorno do último registro lista de pagamentos a qual contém mais de um registro', () => {
-
-        //Arrange
-        const servicoDePagamento = new ServicoDePagamento();
-
-        // Act
-        const pagamentoUm = servicoDePagamento.realizarPagamento(
-            '1111-2222-3333',
-            'TesteEmpresa1',
-            99.99
-        );
-        const pagamentoDois = servicoDePagamento.realizarPagamento(
-            '4444-5555-6666',
-            'TesteEmpresa2',
-            50.50
-        );
-        const ultimoPagamento = servicoDePagamento.consultarUltimoPagamento();
-
-        //Assert            
-        assert.equal(ultimoPagamento.codigoDeBarras, '4444-5555-6666');
-        assert.equal(ultimoPagamento.empresa, 'TesteEmpresa2');
-        assert.equal(ultimoPagamento.valor, 50.50);
-        assert.equal(ultimoPagamento.categoria, 'padrão');
-    });
-
-    it('Teste 5: Validar que a lista de pagamentos permite salvar mais de um único registro', () => {
+    it('Teste 4: Validar que a lista de pagamentos permite salvar mais de um único registro', () => {
 
         //Arrange
         const servicoDePagamento = new ServicoDePagamento();
@@ -109,5 +84,29 @@ describe('Classe de Servico de Pagamento', () => {
 
         //Assert       
         assert.equal(qtdRegistrosDaLista, 3);
+    });
+    it('Teste 5: Validar o retorno do último registro da lista de pagamentos (a qual contém mais de um registro)', () => {
+
+        //Arrange
+        const servicoDePagamento = new ServicoDePagamento();
+
+        // Act
+        const pagamentoUm = servicoDePagamento.realizarPagamento(
+            '1111-2222-3333',
+            'TesteEmpresa1',
+            99.99
+        );
+        const pagamentoDois = servicoDePagamento.realizarPagamento(
+            '4444-5555-6666',
+            'TesteEmpresa2',
+            50.50
+        );
+        const ultimoPagamento = servicoDePagamento.consultarUltimoPagamento();
+
+        //Assert            
+        assert.equal(ultimoPagamento.codigoDeBarras, '4444-5555-6666');
+        assert.equal(ultimoPagamento.empresa, 'TesteEmpresa2');
+        assert.equal(ultimoPagamento.valor, 50.50);
+        assert.equal(ultimoPagamento.categoria, 'padrão');
     });
 });
